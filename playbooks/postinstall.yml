@@ -4,6 +4,7 @@
 #Changelog:
 #10/15/2022 (08:21PM EDT): Added sudo to ORACLE hosts for the change to using ansible instead of root. Added reboot syntax.
 #04/14/2023 (06:45PM EDT): Added RHEL as a client type.
+
 - hosts: oraclelinux
   tasks:
     - name: Make sure everything is up to date ORACLE
@@ -30,8 +31,6 @@
     - debug:
         var: command_output.stdout_lines 
 
-<<<<<<< Updated upstream
-=======
 - hosts: RHEL
   tasks:
     - name: Make sure everything is up to date RHEL
@@ -65,7 +64,6 @@
         var: command_output.stdout_lines 
 
 
->>>>>>> Stashed changes
 - hosts: ubuntuserver
   tasks:
     - name: Make sure everything is up to date UBUNTU
