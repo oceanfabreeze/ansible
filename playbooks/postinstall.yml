@@ -3,6 +3,7 @@
 #Version = 1.2 Beta Release
 #Changelog:
 #10/15/2022 (08:21PM EDT): Added sudo to ORACLE hosts for the change to using ansible instead of root. Added reboot syntax.
+#04/14/2023 (06:45PM EDT): Added RHEL as a client type.
 
 - hosts: oraclelinux
   tasks:
@@ -29,6 +30,33 @@
       register: command_output
     - debug:
         var: command_output.stdout_lines 
+
+- hosts: RHEL
+  tasks:
+    - name: Make sure everything is up to date RHEL
+      ansible.builtin.command: sudo yum -y upgrade
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+
+    - name: Check if EPEL is enabled RHEL
+      ansible.builtin.command: sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+
+    - name: Check and output RepoList ORACLE
+      ansible.builtin.command: sudo yum repolist
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+
+    - name: Reboot Machines 3 minutes after installation. 
+      ansible.builtin.command: sudo shutdown -r +3 "The system is going down for updates in 3 minutes."
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines 
+
 
 - hosts: ubuntuserver
   tasks:

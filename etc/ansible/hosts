@@ -3,8 +3,9 @@
 #12/15/2021 (08:35PM CST): Removed FreeBSD, ESXi, and Unifi hosts as these don't need to be managed. Removed TAFBotServer.
 #10/15/2022 (04:18PM EDT): Removed Rancher servers. Added Pihole, Vaultwarden, and Transmission. 
 #04/03/2023 (09:28AM EDT): Renamed transmission to grabber. Renamed vaultwarden to webby.
+#04/14/2023 (06:43PM EDT): Added RHEL as a client type
 
-[oraclelinux] #and RHEL. 
+[RHEL]
 #Plex
 star.taffyhome.local
 #VPN, Radarr, Sonarr, Jackett, Transmission
@@ -15,6 +16,8 @@ pihole.taffyhome.local
 automator.taffyhome.local
 #Web Server (NGINX/Portainer/Vault)
 webby.taffyhome.local
+
+[oraclelinux] #and RHEL. 
 
 [ubuntuserver]
 #Homebridge Server
