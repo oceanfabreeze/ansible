@@ -13,7 +13,7 @@ grabber.taffyhome.local
 #PiHole
 pihole.taffyhome.local
 #Ansible Delivery Server
-automator.taffyhome.local
+ansible.taffyhome.local
 #Web Server (NGINX/Portainer/Vault)
 webby.taffyhome.local
 
