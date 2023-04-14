@@ -4,7 +4,6 @@
 #Changelog:
 #10/15/2022 (08:21PM EDT): Added sudo to ORACLE hosts for the change to using ansible instead of root. Added reboot syntax.
 #04/14/2023 (06:45PM EDT): Added RHEL as a client type.
-
 - hosts: oraclelinux
   tasks:
     - name: Make sure everything is up to date ORACLE
@@ -31,6 +30,8 @@
     - debug:
         var: command_output.stdout_lines 
 
+<<<<<<< Updated upstream
+=======
 - hosts: RHEL
   tasks:
     - name: Make sure everything is up to date RHEL
@@ -51,6 +52,12 @@
     - debug:
         var: command_output.stdout_lines
 
+    - name: Make sure standard packaging is installed
+      ansible.builtin.command: sudo yum -y install htop git samba
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+
     - name: Reboot Machines 3 minutes after installation. 
       ansible.builtin.command: sudo shutdown -r +3 "The system is going down for updates in 3 minutes."
       register: command_output
@@ -58,10 +65,18 @@
         var: command_output.stdout_lines 
 
 
+>>>>>>> Stashed changes
 - hosts: ubuntuserver
   tasks:
     - name: Make sure everything is up to date UBUNTU
       shell: sudo apt-get -y upgrade
+      become: true
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+        
+    - name: Make sure everything is up to date UBUNTU
+      shell: sudo apt-get -y htop git samba
       become: true
       register: command_output
     - debug:
@@ -76,18 +91,18 @@
 
 #####Start OS Agnostic Checks/Installs#####
 
-- hosts: all
-  vars:
-    packages:
-      - htop
-      - git
-      - samba
+#- hosts: all
+#  vars:
+#    packages:
+#      - htop
+#      - git
+#      - samba
 
-  tasks:
-    - name: Check to make sure everything is installed
-      package:
-        name: "{{ packages }}"
-        state: latest
-    - name: Confirmed!
-      debug:
-        msg: Packages have been installed successfully.
+#  tasks:
+#    - name: Check to make sure everything is installed
+#      package:
+#        name: "{{ packages }}"
+#        state: latest
+#    - name: Confirmed!
+#      debug:
+#        msg: Packages have been installed successfully.
